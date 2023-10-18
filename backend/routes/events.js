@@ -12,9 +12,11 @@ const router = express.Router();
 router.get("/", async (req, res, next) => {
   try {
     const events = await getAll();
-
-    console.log("from backend");
-    res.json({ events: events });
+    // res.json({ events: events });
+    setTimeout(() => {
+      console.log("from backend");
+      res.json({ events: events });
+    }, 2000);
   } catch (error) {
     next(error);
   }

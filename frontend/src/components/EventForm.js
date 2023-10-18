@@ -3,6 +3,8 @@ import {
   Form,
   useNavigation,
   useActionData,
+  json,
+  redirect,
 } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
@@ -27,7 +29,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="POST" className={classes.form}>
+    <Form method={method} className={classes.form}>
       {actionData && actionData.errors && (
         <ul>
           {Object.values(actionData.errors).map((each) => (
@@ -89,3 +91,39 @@ function EventForm({ method, event }) {
 }
 
 export default EventForm;
+
+export async function action({ request, params }) {
+  console.log("new event action is working");
+  const data = await request.formData();
+
+  const eventData = {
+    title: data.get("title"),
+    image: data.get("image"),
+    date: data.get("date"),
+    description: data.get("description"),
+  };
+  let url = "";
+  if (request.method === "POST") {
+    url = "http://localhost:8080/events";
+  } else if (request.method === "PATCH") {
+    url = "http://localhost:8080/events/" + params.eventId;
+  }
+  console.log("new event action is working", eventData);
+  const response = await fetch(url, {
+    method: request.method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(eventData),
+  });
+  console.log("new event action is working1");
+  if (response.status === 422) {
+    return response;
+  }
+  if (!response.ok) {
+    console.log("form error");
+    throw json({ message: "Could not save new event" }, { status: 500 });
+  }
+
+  return redirect("/events");
+}

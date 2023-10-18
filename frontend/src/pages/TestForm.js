@@ -1,9 +1,12 @@
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 export default function () {
-  console.log("render TestForm");
+  const testData = useLoaderData();
+  const { events } = testData;
+  console.log("render TestForm ", events);
   return (
-    <Form method="POST">
-      <button>submit</button>
-    </Form>
+    // <Form method="POST">
+    //   <button>submit</button>
+    // </Form>
+    <p>Test</p>
   );
 }

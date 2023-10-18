@@ -3,8 +3,8 @@ import { json, useRouteLoaderData } from "react-router-dom";
 export default function () {
   const data = useRouteLoaderData("event-detail");
   console.log("edit ", data);
-  return <EventForm event={data.event} />;
+  return <EventForm event={data.event} method="PATCH" />;
 }
-export async function action({ request, params }) {
-  console.log("edit event action is working........");
-}
+// export async function action({ request, params }) {
+//   console.log("edit event action is working........");
+// }
