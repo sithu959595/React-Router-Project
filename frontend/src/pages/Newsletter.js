@@ -1,7 +1,9 @@
 import NewsletterSignup from "../components/NewsletterSignup";
 import PageContent from "../components/PageContent";
-
+// import { useLoaderData } from "react-router-dom";
 function NewsletterPage() {
+  // const data = useLoaderData();
+  console.log("newsletterpage");
   return (
     <PageContent title="Join our awesome newsletter!">
       <NewsletterSignup />

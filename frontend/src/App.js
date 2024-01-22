@@ -35,6 +35,7 @@ import Error from "./pages/Error";
 import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 import { action as genericActionForm } from "./components/EventForm";
 import TestHome, { action as testAction } from "./pages/TestHome";
+import Test2 from "./pages/Test2";
 function App() {
   const router = createBrowserRouter([
     {
